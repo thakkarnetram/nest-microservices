@@ -17,7 +17,7 @@ export class AppService {
     }
 
     createUser(createUserReq: User) {
-        this.users.push(User);
+        this.users.push(createUserReq);
         this.comsClient.emit(
             'user-created',
             new CreateUserEvent(createUserReq.email)

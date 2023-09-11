@@ -16,7 +16,7 @@ export class AppController {
       this.appService.createUser(createUserReq)
   }
 
-  @Get('/analytics')
+  @Get('analytics')
   getAnalytics(){
       return this.appService.getAnalytics()
   }
