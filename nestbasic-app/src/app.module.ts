@@ -1,12 +1,25 @@
 import {Module} from '@nestjs/common';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
-import {AuthenticationModule} from './authentication/authentication.module';
-import {UsersModule} from './users/users.module';
-import {ConfigModule} from "@nestjs/config";
+import {ClientsModule, Transport} from "@nestjs/microservices";
+
 
 @Module({
-    imports: [AuthenticationModule, UsersModule],
+    imports: [
+        ClientsModule.register(
+            [
+                {
+                    name: 'COMMUNICATION',
+                    transport: Transport.TCP
+                },
+                {
+                    name: 'ANALYTICS',
+                    transport: Transport.TCP,
+                    options: {port: 3001}
+                }
+            ]
+        )
+    ],
     controllers: [AppController],
     providers: [AppService],
 })
